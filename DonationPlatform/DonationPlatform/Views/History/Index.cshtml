@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    int count = 25;
+}
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<h1>History</h1>
+
+<br />
+<br />
+
+<p><b>Veel mensen zijn u al voor gegaan. Hieronder de laatste 25 transacties:</b></p>
+
+<br />
+
+<table>
+    <tr>
+        <th>Afzender</th>
+        <th>Bedrag</th>
+        <th>Datum en tijd?</th>
+    </tr>
+    @for (int i = 0; i < count; i++)
+    {
+        <tr>
+            <th>Dummy</th>
+            <th>0.5 ether</th>
+            <th>@DateTime.Now</th>
+        </tr>
+    }
+</table>
+
+<br />
+<br />
+

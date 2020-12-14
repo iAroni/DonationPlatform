@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1 class="text-center">Dochaintion</h1>
+
+<br />
+<br />
+
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac scelerisque nisi. Vivamus et sapien tempor, porta dui tempus, porta orci. Nullam id laoreet velit. Integer suscipit, turpis quis euismod consequat, odio ligula volutpat lacus, a dapibus quam orci a lorem. Cras semper neque neque, a placerat felis eleifend non. Ut a velit ac sem blandit cursus iaculis sit amet justo. Integer non sapien tortor. Sed ligula urna, accumsan maximus eros sit amet, porta accumsan quam. Mauris lorem tellus, elementum non felis quis, aliquam efficitur ex. Aliquam a libero efficitur, posuere justo id, fermentum tortor. Nullam consectetur augue ut nunc tempus, at imperdiet diam vulputate. Donec dictum est ut ipsum molestie cursus. Fusce sed nisi tellus.</p>
+
+<br />
+<br />
+
+<h2 class="text-center">Populairste Projecten</h2>
+
+<br />
+<br />
+<div class="row">
+    @for (int i = 0; i < 3; i++)
+    {
+
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem">
+                <img src="~/lib/dummy pic.png" style="height:250px" />
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
