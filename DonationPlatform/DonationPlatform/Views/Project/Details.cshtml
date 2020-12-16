@@ -1,0 +1,46 @@
+﻿@model DonationPlatform.Models.ProjectModel
+@{
+    ViewData["Title"] = "Current Projects";
+}
+    <div class="container-fluid">
+        <h1 class="text-center">@Html.DisplayFor(model => model.Name)</h1>
+        <div class="text-center">
+            <img src="~/lib/dummy pic.png" style="height:250px" />
+        </div>
+
+        <hr />
+
+        <div class="container">
+            <h3>Description</h3>
+            <p class="card-text">@Html.DisplayFor(model => model.Description)</p>
+        </div>
+
+        <hr />
+
+        <div class="container">
+            <h3>Donation progress</h3>
+            <div class="row">
+                <div class="col-md-1">
+                    <p>0</p>
+                </div>
+                <div class="col-md-10">
+                    <div class="progress" style="height:30px;">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="@Html.DisplayFor(model => model.Goal)">
+                            0% completed
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <p>@Html.DisplayFor(model => model.Goal)</p>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="container">
+            <a href="/Project/" class="btn btn-primary">Back</a>
+            <a href="#" class="btn btn-primary">Donate</a>
+        </div>
+
+    </div>
