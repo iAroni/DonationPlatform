@@ -8,24 +8,25 @@
     </div>
 <br />
 <br />
-<div class="row">
-    @for (int i = 0; i < 12; i++)
-    {
+<div class="container">
+    <div class="row">
+        @for (int i = 0; i < 12; i++)
+        {
 
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    Project Name
-                </div>
-                <img src="~/lib/dummy pic.png" style="height:250px" />
-                <div class="card-body">
-                    <h5 class="card-title">Description</h5>
-                    <p class="card-text">This project is designed for blah blah blah blah blah blah for the blah blah in blah blah</p>
-                    <a asp-action="Details"asp-route-id="@i" class="btn btn-primary">View more</a>
-                    <a href="#" class="btn btn-primary">Donate</a>
+            <div class="col-md-6" style="padding: 10px">
+                <div class="card " style="">
+                    <div class="card-header">
+                        Project Name
+                    </div>
+                    <img src="~/lib/dummy pic.png" style="height:250px" />
+                    <div class="card-body">
+                        <h5 class="card-title">Description</h5>
+                        <p class="card-text">This project is designed for blah blah blah blah blah blah for the blah blah in blah blah</p>
+                        <a asp-action="Details" asp-route-id="@i" class="btn btn-primary">View more</a>
+                        <a href="#" class="btn btn-primary">Donate</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-    }
+        }
+    </div>
 </div>
