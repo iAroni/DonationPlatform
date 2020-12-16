@@ -33,5 +33,11 @@ namespace DonationPlatform.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public void MyAction()
+        {
+            System.Diagnostics.Debug.WriteLine("Hello");
+        }
+
     }
 }

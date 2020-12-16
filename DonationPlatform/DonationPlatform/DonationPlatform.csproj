@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\web3\" />
+    <Folder Include="wwwroot\contract-info\" />
+  </ItemGroup>
+
 </Project>
