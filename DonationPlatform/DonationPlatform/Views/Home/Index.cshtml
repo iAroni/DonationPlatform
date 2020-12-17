@@ -20,6 +20,8 @@
                             <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             @Html.ActionLink("View more", "Details", "Project", routeValues: new { @id = i }, htmlAttributes: new { })
+                            <a class="btn btn-success" href="@Url.Action("MyAction", "Home")">TEST C#</a>
+                            <button onclick="getMapTemp()">TEST JS</button>
                         </div>
                     </div>
                 </div>
