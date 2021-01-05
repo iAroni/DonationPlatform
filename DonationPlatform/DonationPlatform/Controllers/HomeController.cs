@@ -751,8 +751,8 @@ namespace DonationPlatform.Controllers
             var contract = web3.Eth.GetContract(abi, "0x493306b98DC280d4C7551b3a94602da3d998b70A");
             var function = contract.GetFunction("temp");
             var balanceFirstAmountSend = await function.CallAsync<string>();
-            //
 
+            //
             System.Diagnostics.Debug.WriteLine("temperature " + balanceFirstAmountSend);
         }
 
