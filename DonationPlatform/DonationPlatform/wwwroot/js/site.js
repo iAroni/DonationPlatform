@@ -252,7 +252,11 @@ async function makeDonateProject() {
 
     console.log(contract);
 
-    let makeProjectCall = await contract.methods.makeProject(accounts[0], "test project", "This is a test donation")
+    var _projectAddress = document.getElementById("_projectAddress").value;
+    var _name = document.getElementById("_name").value;
+    var _description = document.getElementById("_description").value;
+
+    let makeProjectCall = await contract.methods.makeProject(_projectAddress, _name, _description)
         .send({ from: accounts[0] })
         .then(result => { return result })
         .catch(err => console.log(err));
