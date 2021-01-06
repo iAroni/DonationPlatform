@@ -211,26 +211,22 @@ async function getContract() {
     var web3 = window.web3;
 
     try {
+
         var MyIdoContract = new web3.eth.Contract(
+            DoChaintion.abi,
+            DoChaintion.networks[4].address
+        );
+
+        /*var MyIdoContract = new web3.eth.Contract(
             abi,
             "0xC1Fb9DC8e518F51e8DcaED744DB43E7487204870"
-        );
+        );*/
         
         return MyIdoContract;
     }
     catch (error) {
         console.log("error " + error);
     }
-}
-
-async function getMapTemp() {
-    let contract = await getContract();
-    var accounts = await web3.eth.getAccounts();
-
-    let getResult = await contract.methods.temp().call()
-        .then(result => { return result })
-        .catch(err => console.log(err));
-    console.log(getResult);
 }
 
 async function donateToProject(number) {
@@ -252,7 +248,7 @@ async function makeDonateProject() {
 
     console.log(contract);
 
-    let makeProjectCall = await contract.methods.makeProject(accounts[0], "test project", "This is a test donation")
+    let makeProjectCall = await contract.methods.makeProject(accounts[0], "testation", "test project", "This is a test donation")
         .send({ from: accounts[0] })
         .then(result => { return result })
         .catch(err => console.log(err));
