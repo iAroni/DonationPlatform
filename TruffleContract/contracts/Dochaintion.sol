@@ -7,6 +7,7 @@ contract Dochaintion {
     struct Project {
       uint projectId;
       address projectAddress;
+      string projectName;
       string name;
       string description;
       uint totalDonation;
@@ -16,6 +17,7 @@ contract Dochaintion {
       address donator;
       uint amount;
       address projectAddress;
+      string projectName;
     }
 
     //Arrays
@@ -31,13 +33,13 @@ contract Dochaintion {
     event donationMade(Donation donation);
 
     //Project creation
-    function makeProject(address _projectAddress, string memory _name, string memory _description) public {
+    function makeProject(address _projectAddress, string memory _projectName ,string memory _name, string memory _description) public {
 
       //Get latest number for project id.
       uint currentLatestProjectNumber = projectsList.length;
 
       //Make project with given information
-      Project memory newProject = Project(currentLatestProjectNumber, _projectAddress, _name, _description,0);
+      Project memory newProject = Project(currentLatestProjectNumber,_projectAddress, _projectName, _name, _description,0);
 
       //Save the project for lookup
       projectsList.push(newProject);
@@ -55,10 +57,15 @@ contract Dochaintion {
 
       //check if call succeeded go further
       (bool success, ) = idToProject[chosenProjectId].projectAddress.call{value : msg.value}('');
-      require(success);
+      require(success, "Transfer was not succesfull");
       
       //Save donation in chain
-      Donation memory madeDonation = Donation(msg.sender,msg.value,idToProject[chosenProjectId].projectAddress);
+      Donation memory madeDonation = Donation(
+        msg.sender,
+        msg.value,
+        idToProject[chosenProjectId].projectAddress,
+        idToProject[chosenProjectId].projectName
+      );
       donationsList.push(madeDonation);
 
       //Event it

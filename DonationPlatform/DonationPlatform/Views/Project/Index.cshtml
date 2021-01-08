@@ -72,20 +72,16 @@
             cardContainer.appendChild(cardStyle);
 
         }
-
         let initListOfTasks = () => {
             if (cardContainer) {
                 document.getElementById('card-container').replaceWith(cardContainer);
                 return;
             }
-
             cardContainer = document.getElementById('card-container');
             makeProjectCall.forEach((task) => {
                 createTaskCard(task);
             });
         };
-
         initListOfTasks();
-
     };
 </script>

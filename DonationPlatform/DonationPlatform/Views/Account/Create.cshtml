@@ -6,15 +6,19 @@
 
 <h1>Create</h1>
 
+<p id="message" style="color:darkgreen;"></p>
+
 <div class="row">
     <div class="col-md-6">
-            <div>@Html.DisplayNameFor(model => model._projectAddress)</div>
-            <input type="text" name="_projectAddress" id="_projectAddress" required>
-            <div>@Html.DisplayNameFor(model => model._name)</div>
-            <input type="text" name="_name" id="_name" required>
-            <div>@Html.DisplayNameFor(model => model._description)</div>
-            <textarea name="_description" id="_description" rows="4" cols="50" required></textarea>
-            <br />
-            <button onclick="makeDonateProject()">Create donation project</button>
+        <div>@Html.DisplayNameFor(model => model._projectAddress)</div>
+        <input type="text" name="_projectAddress" id="_projectAddress" required>
+        <div>@Html.DisplayNameFor(model => model._name)</div>
+        <input type="text" name="_name" id="_name" required>
+        <div>@Html.DisplayNameFor(model => model._organisation)</div>
+        <input type="text" name="_organisation" id="_organisation" required>
+        <div>@Html.DisplayNameFor(model => model._description)</div>
+        <textarea name="_description" id="_description" rows="4" cols="50" required></textarea>
+        <br />
+        <button onclick="makeDonateProject()">Create donation project</button>
     </div>
 </div>

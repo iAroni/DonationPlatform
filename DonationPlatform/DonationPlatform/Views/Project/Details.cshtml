@@ -1,9 +1,14 @@
 ﻿@model DonationPlatform.Models.ProjectModel
+
+
 @{
+    int test = int.Parse(Url.RouteUrl(ViewContext.RouteData.Values).Split('/')[3]);
     ViewData["Title"] = "Current Projects";
+
 }
+
     <div class="container-fluid">
-        <h1 class="text-center">@Html.DisplayFor(model => model.Name)</h1>
+        <h1 id="project-name" class="text-center">@Html.DisplayFor(model => model.Name)</h1>
         <div class="text-center">
             <img src="~/lib/dummy pic.png" style="height:250px" />
         </div>
@@ -12,7 +17,14 @@
 
         <div class="container">
             <h3>Description</h3>
-            <p class="card-text">@Html.DisplayFor(model => model.Description)</p>
+            <p id="project-description" class="card-text">@Html.DisplayFor(model => model.Description)</p>
+        </div>
+
+        <hr />
+        
+        <div class="container">
+            <h3>Organisation</h3>
+            <p id="organisation" class="card-text">@Html.DisplayFor(model => model.Description)</p>
         </div>
 
         <hr />
@@ -40,7 +52,90 @@
 
         <div class="container">
             <a href="/Project/" class="btn btn-primary">Back</a>
-            <button onclick="donateToProject(1)">DONATE</button>
+            <button class="btn btn-primary" onclick="donateToProject(@test)">DONATE</button>
         </div>
 
     </div>
+
+<script>
+    window.onload = async function () {
+        var contract = await getContract();
+        var accounts = await web3.eth.getAccounts();
+
+        var makeProjectCall = await contract.methods.getAllProjects()
+            .call()
+            .then(result => { return result })
+            .catch(err => console.log(err));
+
+        console.log(makeProjectCall);
+
+        var currentProject;
+
+        for (var i = 0; i < makeProjectCall.length; i++) {
+            if (makeProjectCall[i]['projectId'] == @test) {
+                currentProject = makeProjectCall[i];
+            }
+        }
+
+        document.getElementById('project-name').innerText = currentProject['projectName'];
+        document.getElementById('project-description').innerText = currentProject['description'];
+        document.getElementById('organisation').innerText = currentProject['name'];
+
+        console.log(currentProject);
+
+        let cardContainer;
+
+        /*let createTaskCard = (makeProjectCall) => {
+
+            let cardStyle = document.createElement('div');
+            cardStyle.className = 'col-md-6';
+            cardStyle.style = 'padding: 10px';
+
+            let card = document.createElement('div');
+            card.className = 'card';
+
+            let cardheader = document.createElement('div');
+            cardheader.className = 'card-header';
+            cardheader.innerText = makeProjectCall.name;
+
+            let img = document.createElement('img');
+            img.src = '/lib/dummy pic.png';
+            img.style = 'height:250px';
+
+            let cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            let title = document.createElement('h5');
+            title.innerText = makeProjectCall.projectAddress;
+            title.className = 'card-title';
+
+            let meerInfo = document.createElement('a');
+            meerInfo.className = 'btn btn-primary';
+            meerInfo.innerText = 'Meer info';
+            meerInfo.href = '/Project/Details/' + makeProjectCall.projectId;
+
+            card.appendChild(cardheader);
+            card.appendChild(img);
+            card.appendChild(cardBody);
+
+            cardBody.appendChild(title);
+            cardBody.appendChild(meerInfo);
+
+            cardStyle.appendChild(card);
+
+            cardContainer.appendChild(cardStyle);
+
+        }
+        let initListOfTasks = () => {
+            if (cardContainer) {
+                document.getElementById('card-container').replaceWith(cardContainer);
+                return;
+            }
+            cardContainer = document.getElementById('card-container');
+            makeProjectCall.forEach((task) => {
+                createTaskCard(task);
+            });
+        };
+        initListOfTasks();*/
+    };
+</script>
