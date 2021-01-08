@@ -41,13 +41,42 @@ async function donateToProject(number) {
     var contract = await getContract();
     var accounts = await web3.eth.getAccounts();
 
-    let donateCallToContract = await contract.methods.fundProject(number).send({ from: accounts[0], value: 1000000000000000000 })
+    amountDonate = parseInt(document.getElementById('amountToDonate').value) * 1000000000000000000;
+
+    let donateCallToContract = await contract.methods.fundProject(number).send({ from: accounts[0], value: amountDonate })
         .then(result => { return result })
         .catch(err => console.log(err));
-    console.log(donateCallToContract);
 
-    console.log("donated to " + number);
+    document.getElementById('message-for-donate').innerText = 'Successvol gedoneerd';
+
+    loadDetailsPage(number);
+
 } 
+
+async function loadDetailsPage(number) {
+    var contract = await getContract();
+    var accounts = await web3.eth.getAccounts();
+
+    var makeProjectCall = await contract.methods.getAllProjects()
+        .call()
+        .then(result => { return result })
+        .catch(err => console.log(err));
+
+    console.log(makeProjectCall);
+
+    var currentProject;
+
+    for (var i = 0; i < makeProjectCall.length; i++) {
+        if (makeProjectCall[i]['projectId'] == number) {
+            currentProject = makeProjectCall[i];
+        }
+    }
+
+    document.getElementById('project-name').innerText = currentProject['projectName'];
+    document.getElementById('project-description').innerText = currentProject['description'];
+    document.getElementById('organisation').innerText = currentProject['name'];
+    document.getElementById('donation').innerText = currentProject['totalDonation'];
+}
 
 async function makeDonateProject() {
     var contract = await getContract();
@@ -58,9 +87,11 @@ async function makeDonateProject() {
     var _description = document.getElementById("_description").value;
     var _organisation = document.getElementById("_organisation").value;
 
-    let makeProjectCall = await contract.methods.makeProject(_projectAddress, _name, _organisation, _description )
+    let makeProjectCall = await contract.methods.makeProject(_projectAddress, _name, _organisation, _description)
         .send({ from: accounts[0] })
-        .then(result => { document.getElementById('message').innerText = "Success" })
+        .then(result => {
+            document.getElementById('message').innerText = "Success"
+        })
         .catch(err => console.log(err));
 }
 

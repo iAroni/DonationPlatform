@@ -59,6 +59,9 @@ contract Dochaintion {
       (bool success, ) = idToProject[chosenProjectId].projectAddress.call{value : msg.value}('');
       require(success, "Transfer was not succesfull");
       
+      idToProject[chosenProjectId].totalDonation += msg.value;
+      projectsList[chosenProjectId].totalDonation += msg.value;
+
       //Save donation in chain
       Donation memory madeDonation = Donation(
         msg.sender,
@@ -74,6 +77,10 @@ contract Dochaintion {
 
     function getAllProjects() public view returns(Project[] memory) {
       return projectsList;
+    }
+
+    function getProject(uint number) public view returns(Project memory){
+      return projectsList[number];
     }
 
     function getAllDonations() public view returns(Donation[] memory) {
