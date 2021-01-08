@@ -2,38 +2,86 @@
     ViewData["Title"] = "Current Projects";
 }
 
-    <div class="text-center">
-        <h1>Projects on the current Dochaintion</h1>
-        <p>On this page you can find the projects that are already on the chain!</p>
-    </div>
-<br />
-<br />
-<div class="container">
-    <div class="row">
-        @for (int i = 0; i < 12; i++)
-        {
-            <div class="col-md-6" style="padding: 10px">
-                <div class="card " style="">
-                    <div class="card-header">
-                        Project Name
-                    </div>
-                    <img src="~/lib/dummy pic.png" style="height:250px" />
-                    <div class="card-body">
-                        <h5 class="card-title">Description</h5>
-                        <p class="card-text">This project is designed for blah blah blah blah blah blah for the blah blah in blah blah</p>
-                        <a asp-action="Details" asp-route-id="@i" class="btn btn-primary">View more</a>
-                        <a href="#" class="btn btn-primary">Donate</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    <div class="row">
-        <div>
-            <button onclick="makeDonateProject()">Create test donation project</button>
-            <button onclick="getAllProjectsOfContract()">Get projects</button>
-            <button onclick="donateToProject(1)">Donate to test project</button>
-            
-        </div>
-    </div>
+<div class="text-center">
+    <h1>Projects on the current Dochaintion</h1>
+    <p>On this page you can find the projects that are already on the chain!</p>
 </div>
+<br />
+<br />
+
+<div class="container">
+    <div class="row" id="card-container"></div>
+</div>
+
+<script>
+    window.onload = async function () {
+        var contract = await getContract();
+        var accounts = await web3.eth.getAccounts();
+
+        let makeProjectCall = await contract.methods.getAllProjects()
+            .call()
+            .then(result => { return result })
+            .catch(err => console.log(err));
+
+        //for (var i = 0; i < makeProjectCall.length; i++) {
+        //    //create bootstrapcard
+
+        console.log(makeProjectCall);
+        //}
+
+        let cardContainer;
+
+        let createTaskCard = (makeProjectCall) => {
+
+            let cardStyle = document.createElement('div');
+            cardStyle.className = 'col-md-6';
+            cardStyle.style = 'padding: 10px';
+
+            let card = document.createElement('div');
+            card.className = 'card';
+
+            let cardheader = document.createElement('div');
+            cardheader.className = 'card-header';
+            cardheader.innerText = makeProjectCall.name;
+
+            let img = document.createElement('img');
+            img.src = '/lib/dummy pic.png';
+            img.style = 'height:250px';
+
+            let cardBody = document.createElement('div');
+            cardBody.className = 'card-body';
+
+            let title = document.createElement('h5');
+            title.innerText = makeProjectCall.projectAddress;
+            title.className = 'card-title';
+
+            let meerInfo = document.createElement('a');
+            meerInfo.className = 'btn btn-primary';
+            meerInfo.innerText = 'Meer info';
+            meerInfo.href = '/Project/Details/' + makeProjectCall.projectId;
+
+            card.appendChild(cardheader);
+            card.appendChild(img);
+            card.appendChild(cardBody);
+
+            cardBody.appendChild(title);
+            cardBody.appendChild(meerInfo);
+
+            cardStyle.appendChild(card);
+
+            cardContainer.appendChild(cardStyle);
+
+        }
+        let initListOfTasks = () => {
+            if (cardContainer) {
+                document.getElementById('card-container').replaceWith(cardContainer);
+                return;
+            }
+            cardContainer = document.getElementById('card-container');
+            makeProjectCall.forEach((task) => {
+                createTaskCard(task);
+            });
+        };
+        initListOfTasks();
+    };
+</script>

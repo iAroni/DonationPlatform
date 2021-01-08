@@ -41,7 +41,7 @@ async function donateToProject(number) {
     var contract = await getContract();
     var accounts = await web3.eth.getAccounts();
 
-    let donateCallToContract = await contract.methods.fundProject(number).send({ from: accounts[0], value: 10000000000000000 })
+    let donateCallToContract = await contract.methods.fundProject(number).send({ from: accounts[0], value: 1000000000000000000 })
         .then(result => { return result })
         .catch(err => console.log(err));
     console.log(donateCallToContract);
@@ -53,14 +53,15 @@ async function makeDonateProject() {
     var contract = await getContract();
     var accounts = await web3.eth.getAccounts();
 
-    console.log(contract);
+    var _projectAddress = document.getElementById("_projectAddress").value;
+    var _name = document.getElementById("_name").value;
+    var _description = document.getElementById("_description").value;
+    var _organisation = document.getElementById("_organisation").value;
 
-    let makeProjectCall = await contract.methods.makeProject(accounts[0], "testation", "test project", "This is a test donation")
+    let makeProjectCall = await contract.methods.makeProject(_projectAddress, _name, _organisation, _description )
         .send({ from: accounts[0] })
-        .then(result => { return result })
+        .then(result => { document.getElementById('message').innerText = "Success" })
         .catch(err => console.log(err));
-
-    console.log(makeProjectCall);
 }
 
 async function getAllProjectsOfContract() {
