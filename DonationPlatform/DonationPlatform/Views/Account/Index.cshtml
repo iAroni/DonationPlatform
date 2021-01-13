@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container">
+    <div class="row">
+        <h2 style="padding-bottom:25px">Below you find the list of projects that are active</h2>
+        <table id="project-container" style="width:100%">
+        </table>
+    </div>
+    <div style="padding-top:25px" class="row">
+        <a href="account/create"><button class="btn btn-primary">Create new project</button></a>
+    </div>
+</div>
+
+
+<script>
+    window.onload = async function () {
+        var contract = await getContract();
+        var accounts = await web3.eth.getAccounts();
+
+        let makeProjectCall = await contract.methods.getAllProjects()
+            .call()
+            .then(result => { return result })
+            .catch(err => console.log(err));
+
+        console.log(makeProjectCall);
+
+        let projectContainer;
+
+        let createTaskCard = (makeProjectCall) => {
+
+            let tr = document.createElement('tr');
+
+            let projectId = document.createElement('th');
+            projectId.innerText = makeProjectCall.projectId;
+
+            let name = document.createElement('th');
+            name.innerText = makeProjectCall.name;
+
+            let projectAddress = document.createElement('th');
+            projectAddress.innerText = makeProjectCall.projectAddress;
+
+            let deleteProject = document.createElement('button');
+            deleteProject.innerText = 'Delete';
+            deleteProject.className = 'btn btn-primary';
+            //deleteProject.onclick = Delete();
+
+            tr.appendChild(projectId);
+            tr.appendChild(name);
+            tr.appendChild(projectAddress);
+            tr.appendChild(deleteProject);
+
+            projectContainer.appendChild(tr);
+
+        }
+        let initListOfTasks = () => {
+            if (projectContainer) {
+                document.getElementById('project-container').replaceWith(projectContainer);
+                return;
+            }
+            projectContainer = document.getElementById('project-container');
+            makeProjectCall.forEach((task) => {
+                createTaskCard(task);
+            });
+        };
+        initListOfTasks();
+    };
+</script>

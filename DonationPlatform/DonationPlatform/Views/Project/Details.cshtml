@@ -21,7 +21,7 @@
         </div>
 
         <hr />
-        
+
         <div class="container">
             <h3>Organisation</h3>
             <p id="organisation" class="card-text">@Html.DisplayFor(model => model.Description)</p>
@@ -30,112 +30,26 @@
         <hr />
 
         <div class="container">
-            <h3>Donation progress</h3>
-            <div class="row">
-                <div class="col-md-1">
-                    <p>0</p>
-                </div>
-                <div class="col-md-10">
-                    <div class="progress" style="height:30px;">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="@Html.DisplayFor(model => model.Goal)">
-                            0% completed
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <p>@Html.DisplayFor(model => model.Goal)</p>
-                </div>
-            </div>
+            <h3>Total Donation (in Wei)</h3>
+            <p id="donation" class="card-text"></p>
         </div>
 
         <hr />
 
         <div class="container">
-            <a href="/Project/" class="btn btn-primary">Back</a>
+            Amount to donate<input type="number" id="amountToDonate" value="1" />
             <button class="btn btn-primary" onclick="donateToProject(@test)">DONATE</button>
+        </div>
+
+        <div class="container">
+            <p id="message-for-donate"></p>
+            <a href="/Project/" class="btn btn-primary">Back</a>
         </div>
 
     </div>
 
 <script>
     window.onload = async function () {
-        var contract = await getContract();
-        var accounts = await web3.eth.getAccounts();
-
-        var makeProjectCall = await contract.methods.getAllProjects()
-            .call()
-            .then(result => { return result })
-            .catch(err => console.log(err));
-
-        console.log(makeProjectCall);
-
-        var currentProject;
-
-        for (var i = 0; i < makeProjectCall.length; i++) {
-            if (makeProjectCall[i]['projectId'] == @test) {
-                currentProject = makeProjectCall[i];
-            }
-        }
-
-        document.getElementById('project-name').innerText = currentProject['projectName'];
-        document.getElementById('project-description').innerText = currentProject['description'];
-        document.getElementById('organisation').innerText = currentProject['name'];
-
-        console.log(currentProject);
-
-        let cardContainer;
-
-        /*let createTaskCard = (makeProjectCall) => {
-
-            let cardStyle = document.createElement('div');
-            cardStyle.className = 'col-md-6';
-            cardStyle.style = 'padding: 10px';
-
-            let card = document.createElement('div');
-            card.className = 'card';
-
-            let cardheader = document.createElement('div');
-            cardheader.className = 'card-header';
-            cardheader.innerText = makeProjectCall.name;
-
-            let img = document.createElement('img');
-            img.src = '/lib/dummy pic.png';
-            img.style = 'height:250px';
-
-            let cardBody = document.createElement('div');
-            cardBody.className = 'card-body';
-
-            let title = document.createElement('h5');
-            title.innerText = makeProjectCall.projectAddress;
-            title.className = 'card-title';
-
-            let meerInfo = document.createElement('a');
-            meerInfo.className = 'btn btn-primary';
-            meerInfo.innerText = 'Meer info';
-            meerInfo.href = '/Project/Details/' + makeProjectCall.projectId;
-
-            card.appendChild(cardheader);
-            card.appendChild(img);
-            card.appendChild(cardBody);
-
-            cardBody.appendChild(title);
-            cardBody.appendChild(meerInfo);
-
-            cardStyle.appendChild(card);
-
-            cardContainer.appendChild(cardStyle);
-
-        }
-        let initListOfTasks = () => {
-            if (cardContainer) {
-                document.getElementById('card-container').replaceWith(cardContainer);
-                return;
-            }
-            cardContainer = document.getElementById('card-container');
-            makeProjectCall.forEach((task) => {
-                createTaskCard(task);
-            });
-        };
-        initListOfTasks();*/
+        loadDetailsPage(@test);
     };
 </script>
