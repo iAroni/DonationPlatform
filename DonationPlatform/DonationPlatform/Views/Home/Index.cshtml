@@ -8,12 +8,12 @@
     </div>
 </div>
 
-<div class="container-fluid text-center">
+<div class="container text-center">
     <h2 class="text-center" style="padding-bottom: 20px;">Latest Projects</h2>
     <div class="row" id="latestThree"></div>
 </div>
 
-<div class="container-fluid text-center">
+<div class="container text-center">
     <h2 class="text-center" style="padding-bottom: 20px;">Populair Projects</h2>
     <div class="row" id="famousThree"></div>
 </div>
@@ -67,10 +67,22 @@
             title.innerText = latestThreeProject.projectAddress;
             title.className = 'card-title';
 
-            let meerInfo = document.createElement('a');
-            meerInfo.className = 'btn btn-primary';
-            meerInfo.innerText = 'Meer info';
-            meerInfo.href = '/Project/Details/' + latestThreeProject.projectId;
+            let meerInfo;
+            
+            if (latestThreeProject.isActive) {
+                meerInfo = document.createElement('a');
+                meerInfo.className = 'btn btn-primary';
+                meerInfo.innerText = 'Meer info';
+                meerInfo.href = '/Project/Details/' + latestThreeProject.projectId;
+            } else {
+                meerInfo = document.createElement('h4')
+                meerInfo.innerText = 'Finished';
+                meerInfo.className = '';
+                meerInfo.href = '/Project/Details/' + latestThreeProject.projectId;
+                meerInfo.disabled = true;
+                //meerInfo.href = '/Project/Details/' + latestThreeProject.projectId;
+            }
+            
 
             card.appendChild(cardheader);
             card.appendChild(img);
