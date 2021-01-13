@@ -42,10 +42,25 @@
             let projectAddress = document.createElement('th');
             projectAddress.innerText = makeProjectCall.projectAddress;
 
-            let deleteProject = document.createElement('button');
-            deleteProject.innerText = 'Delete';
-            deleteProject.className = 'btn btn-primary';
-            //deleteProject.onclick = Delete();
+            let deleteProject;
+            if (!makeProjectCall.isActive) {
+                deleteProject = document.createElement('button');
+                deleteProject.innerText = 'Reactivate';
+                deleteProject.className = 'btn btn-primary';
+                deleteProject.attributes = 'disabled';
+                deleteProject.onclick = async function reactiveProject() {
+                    
+                };
+            } else {
+                deleteProject = document.createElement('button');
+                deleteProject.innerText = 'Delete';
+                deleteProject.className = 'btn btn-primary';
+                deleteProject.style = 'background-color: red';
+                deleteProject.onclick = async function deactiveProject() {
+                    await contract.methods.deactiveProject(makeProjectCall.projectId).send({ from: accounts[0], gas: 470000, gasprice:0 });
+                };
+            }
+            
 
             tr.appendChild(projectId);
             tr.appendChild(name);
@@ -67,4 +82,6 @@
         };
         initListOfTasks();
     };
+
+    
 </script>
