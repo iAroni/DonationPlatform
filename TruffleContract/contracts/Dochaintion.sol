@@ -11,6 +11,7 @@ contract Dochaintion {
       string name;
       string description;
       uint totalDonation;
+      bool isActive;
     } 
 
     struct Donation {
@@ -39,7 +40,7 @@ contract Dochaintion {
       uint currentLatestProjectNumber = projectsList.length;
 
       //Make project with given information
-      Project memory newProject = Project(currentLatestProjectNumber,_projectAddress, _projectName, _name, _description,0);
+      Project memory newProject = Project(currentLatestProjectNumber,_projectAddress, _projectName, _name, _description,0 , true);
 
       //Save the project for lookup
       projectsList.push(newProject);
@@ -80,7 +81,20 @@ contract Dochaintion {
     }
 
     function getProject(uint number) public view returns(Project memory){
+      require(projectsList[number].isActive," This project is inactive");
+
       return projectsList[number];
+    }
+
+    function deactiveProject(uint number) public {
+      address caller = msg.sender;
+      projectsList[number].isActive = false;
+      for(uint i = 0; i < founderToProject[msg.sender].length; i++){
+          if(founderToProject[caller][i].projectId == number){
+            founderToProject[caller][i].isActive = false;
+          }
+      }
+      idToProject[number].isActive = false;
     }
 
     function getAllDonations() public view returns(Donation[] memory) {
