@@ -57,25 +57,21 @@ async function loadDetailsPage(number) {
     var contract = await getContract();
     var accounts = await web3.eth.getAccounts();
 
-    var makeProjectCall = await contract.methods.getAllProjects()
+    var project = await contract.methods.getProject(number)
         .call()
         .then(result => { return result })
         .catch(err => console.log(err));
 
-    console.log(makeProjectCall);
+    console.log(project);
 
-    var currentProject;
-
-    for (var i = 0; i < makeProjectCall.length; i++) {
-        if (makeProjectCall[i]['projectId'] == number) {
-            currentProject = makeProjectCall[i];
-        }
+    if (project === undefined) {
+        window.location.href = '/project/notFound';
     }
 
-    document.getElementById('project-name').innerText = currentProject['projectName'];
-    document.getElementById('project-description').innerText = currentProject['description'];
-    document.getElementById('organisation').innerText = currentProject['name'];
-    document.getElementById('donation').innerText = currentProject['totalDonation'];
+    document.getElementById('project-name').innerText = project.projectName;
+    document.getElementById('project-description').innerText = project.description;
+    document.getElementById('organisation').innerText = project.name;
+    document.getElementById('donation').innerText = project.totalDonation;
 }
 
 async function makeDonateProject() {

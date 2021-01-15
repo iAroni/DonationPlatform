@@ -27,5 +27,12 @@ namespace DonationPlatform.Controllers
             return View(project);
             
         }
+
+        public IActionResult NotFound()
+        {
+            return View();
+        }
+
+
     }
 }

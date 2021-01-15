@@ -81,7 +81,7 @@ contract Dochaintion {
     }
 
     function getProject(uint number) public view returns(Project memory){
-      require(projectsList[number].isActive," This project is inactive");
+      require(projectsList[number].isActive == true," This project is inactive");
 
       return projectsList[number];
     }
@@ -95,6 +95,17 @@ contract Dochaintion {
           }
       }
       idToProject[number].isActive = false;
+    }
+
+    function activateProject(uint number) public {
+      address caller = msg.sender;
+      projectsList[number].isActive = true;
+      for(uint i = 0; i < founderToProject[msg.sender].length; i++){
+          if(founderToProject[caller][i].projectId == number){
+            founderToProject[caller][i].isActive = true;
+          }
+      }
+      idToProject[number].isActive = true;
     }
 
     function getAllDonations() public view returns(Donation[] memory) {

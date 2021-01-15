@@ -33,6 +33,8 @@
 
         let createTaskCard = (makeProjectCall) => {
 
+            if (makeProjectCall.isActive) {
+            
             let cardStyle = document.createElement('div');
             cardStyle.className = 'col-md-6';
             cardStyle.style = 'padding: 10px';
@@ -69,7 +71,8 @@
 
             cardStyle.appendChild(card);
 
-            cardContainer.appendChild(cardStyle);
+                cardContainer.appendChild(cardStyle);
+            }
 
         }
         let initListOfTasks = () => {
