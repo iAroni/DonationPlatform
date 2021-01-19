@@ -23,12 +23,6 @@
             .then(result => { return result })
             .catch(err => console.log(err));
 
-        //for (var i = 0; i < makeProjectCall.length; i++) {
-        //    //create bootstrapcard
-
-        console.log(makeProjectCall);
-        //}
-
         let cardContainer;
 
         let createTaskCard = (makeProjectCall) => {
@@ -36,7 +30,7 @@
             if (makeProjectCall.isActive) {
             
             let cardStyle = document.createElement('div');
-            cardStyle.className = 'col-md-6';
+            cardStyle.className = 'col-md-4';
             cardStyle.style = 'padding: 10px';
 
             let card = document.createElement('div');
@@ -44,7 +38,7 @@
 
             let cardheader = document.createElement('div');
             cardheader.className = 'card-header';
-            cardheader.innerText = makeProjectCall.name;
+            cardheader.innerText = `Project: ${makeProjectCall.name}`;
 
             let img = document.createElement('img');
             img.src = '/lib/dummy pic.png';
@@ -54,7 +48,7 @@
             cardBody.className = 'card-body';
 
             let title = document.createElement('h5');
-            title.innerText = makeProjectCall.projectAddress;
+            title.innerText = makeProjectCall.description;
             title.className = 'card-title';
 
             let meerInfo = document.createElement('a');
