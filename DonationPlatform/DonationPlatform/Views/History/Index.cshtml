@@ -28,26 +28,38 @@
 <br />
 <br />
 
-<p><b>Veel mensen zijn u al voor gegaan. Hieronder de laatste 25 transacties:</b></p>
+<p><b>Veel mensen zijn u al voor gegaan. De laatste donaties staan als eerst</b></p>
 
 <br />
 
-<table>
-    <tr>
-        <th>Afzender</th>
-        <th>Bedrag</th>
-        <th>Datum en tijd?</th>
-    </tr>
-    @for (int i = 0; i < count; i++)
-    {
-        <tr>
-            <th>Dummy</th>
-            <th>0.5 ether</th>
-            <th>@DateTime.Now</th>
-        </tr>
+<table id="history"></table>
+
+<br />
+<br />
+
+<script>
+    window.onload = async function () {
+        var allDonations = await getAllDonationsOfContract();
+        allDonations = allDonations.reverse();
+        var table = "<tr>";
+        table += "<th>Project</th>";
+        table += "<th>Bedrag (In Wei)</th>";
+        table += "<th>Afzender</th>";
+        table += "<th>Datum en tijd?</th>";
+        table += "</tr>";
+
+        for (var i = 0; i < allDonations.length; i++) {
+            var current = allDonations[i];
+            table += "<tr>";
+            table += `<th>${current.projectName}</th>`;
+            table += `<th>${current.amount}</th>`;
+            table += `<th>${current.donator}</th>`;
+            table += `<th>${new Date(current.date*1000).toUTCString()}</th>`;
+            table += "</tr>";
+        }
+
+        document.getElementById('history').innerHTML = table;
+
     }
-</table>
-
-<br />
-<br />
+</script>
 
