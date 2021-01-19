@@ -102,3 +102,15 @@ async function getAllProjectsOfContract() {
 
     console.log(makeProjectCall);
 }
+
+async function getAllDonationsOfContract() {
+    var contract = await getContract();
+    var accounts = await web3.eth.getAccounts();
+
+    let makeProjectCall = await contract.methods.getAllDonations()
+        .call()
+        .then(result => { return result })
+        .catch(err => console.log(err));
+
+    return makeProjectCall;
+}
