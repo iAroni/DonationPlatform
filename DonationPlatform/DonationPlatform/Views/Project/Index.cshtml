@@ -34,42 +34,42 @@
         let createTaskCard = (makeProjectCall) => {
 
             if (makeProjectCall.isActive) {
-            
-            let cardStyle = document.createElement('div');
-            cardStyle.className = 'col-md-6';
-            cardStyle.style = 'padding: 10px';
 
-            let card = document.createElement('div');
-            card.className = 'card';
+                let cardStyle = document.createElement('div');
+                cardStyle.className = 'col-md-6';
+                cardStyle.style = 'padding: 10px';
 
-            let cardheader = document.createElement('div');
-            cardheader.className = 'card-header';
-            cardheader.innerText = makeProjectCall.name;
+                let card = document.createElement('div');
+                card.className = 'card';
 
-            let img = document.createElement('img');
-            img.src = '/lib/dummy pic.png';
-            img.style = 'height:250px';
+                let cardheader = document.createElement('div');
+                cardheader.className = 'card-header';
+                cardheader.innerText = makeProjectCall.name;
 
-            let cardBody = document.createElement('div');
-            cardBody.className = 'card-body';
+                let img = document.createElement('img');
+                img.src = `https://ipfs.io/ipfs/${makeProjectCall.photoCid}`;
+                img.style = 'height:250px';
 
-            let title = document.createElement('h5');
-            title.innerText = makeProjectCall.projectAddress;
-            title.className = 'card-title';
+                let cardBody = document.createElement('div');
+                cardBody.className = 'card-body';
 
-            let meerInfo = document.createElement('a');
-            meerInfo.className = 'btn btn-primary';
-            meerInfo.innerText = 'Meer info';
-            meerInfo.href = '/Project/Details/' + makeProjectCall.projectId;
+                let title = document.createElement('h5');
+                title.innerText = makeProjectCall.projectAddress;
+                title.className = 'card-title';
 
-            card.appendChild(cardheader);
-            card.appendChild(img);
-            card.appendChild(cardBody);
+                let meerInfo = document.createElement('a');
+                meerInfo.className = 'btn btn-primary';
+                meerInfo.innerText = 'Meer info';
+                meerInfo.href = '/Project/Details/' + makeProjectCall.projectId;
 
-            cardBody.appendChild(title);
-            cardBody.appendChild(meerInfo);
+                card.appendChild(cardheader);
+                card.appendChild(img);
+                card.appendChild(cardBody);
 
-            cardStyle.appendChild(card);
+                cardBody.appendChild(title);
+                cardBody.appendChild(meerInfo);
+
+                cardStyle.appendChild(card);
 
                 cardContainer.appendChild(cardStyle);
             }

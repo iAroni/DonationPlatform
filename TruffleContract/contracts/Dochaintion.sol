@@ -10,6 +10,7 @@ contract Dochaintion {
       string projectName;
       string name;
       string description;
+      string photoCid;
       uint totalDonation;
       bool isActive;
     } 
@@ -35,13 +36,13 @@ contract Dochaintion {
     event donationMade(Donation donation);
 
     //Project creation
-    function makeProject(address _projectAddress, string memory _projectName ,string memory _name, string memory _description) public {
+    function makeProject(address _projectAddress, string memory _projectName ,string memory _name, string memory _description, string memory _photoCid) public {
 
       //Get latest number for project id.
       uint currentLatestProjectNumber = projectsList.length;
 
       //Make project with given information
-      Project memory newProject = Project(currentLatestProjectNumber,_projectAddress, _projectName, _name, _description,0 , true);
+      Project memory newProject = Project(currentLatestProjectNumber,_projectAddress, _projectName, _name, _description, _photoCid,0 , true);
 
       //Save the project for lookup
       projectsList.push(newProject);
