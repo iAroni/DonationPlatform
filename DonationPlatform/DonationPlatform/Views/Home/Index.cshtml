@@ -27,7 +27,7 @@
             .call()
             .then(result => { return result })
             .catch(err => console.log(err));
-
+        console.log(makeProjectCall);
         var latestThreeProject = [];
         var famousThreeProject = [];
 
@@ -57,7 +57,7 @@
             cardheader.innerText = latestThreeProject.name;
 
             let img = document.createElement('img');
-            img.src = '/lib/dummy pic.png';
+            img.src = `https://ipfs.io/ipfs/${latestThreeProject.photoCid}`;
             img.style = 'height:250px';
 
             let cardBody = document.createElement('div');
