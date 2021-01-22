@@ -22,20 +22,21 @@
         background-color: #dddddd;
     }
 </style>
+<div class="container">
+    <h1>History</h1>
 
-<h1>History</h1>
+    <br />
+    <br />
 
-<br />
-<br />
+    <p><b>Here you can find the previous donations. The latest donations are listed first</b></p>
 
-<p><b>Veel mensen zijn u al voor gegaan. De laatste donaties staan als eerst</b></p>
+    <br />
 
-<br />
+    <table id="history"></table>
 
-<table id="history"></table>
-
-<br />
-<br />
+    <br />
+    <br />
+</div>
 
 <script>
     window.onload = async function () {
@@ -43,9 +44,9 @@
         allDonations = allDonations.reverse();
         var table = "<tr>";
         table += "<th>Project</th>";
-        table += "<th>Bedrag (In Wei)</th>";
-        table += "<th>Afzender</th>";
-        table += "<th>Datum en tijd?</th>";
+        table += "<th>Amount (In Wei)</th>";
+        table += "<th>Sender</th>";
+        table += "<th>Date & Time</th>";
         table += "</tr>";
 
         for (var i = 0; i < allDonations.length; i++) {
