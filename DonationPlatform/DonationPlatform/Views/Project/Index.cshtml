@@ -23,20 +23,14 @@
             .then(result => { return result })
             .catch(err => console.log(err));
 
-        //for (var i = 0; i < makeProjectCall.length; i++) {
-        //    //create bootstrapcard
-
-        console.log(makeProjectCall);
-        //}
-
         let cardContainer;
 
         let createTaskCard = (makeProjectCall) => {
 
             if (makeProjectCall.isActive) {
-
+            
                 let cardStyle = document.createElement('div');
-                cardStyle.className = 'col-md-6';
+                cardStyle.className = 'col-md-4';
                 cardStyle.style = 'padding: 10px';
 
                 let card = document.createElement('div');
