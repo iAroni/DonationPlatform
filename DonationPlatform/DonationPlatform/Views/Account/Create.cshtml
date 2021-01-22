@@ -18,8 +18,7 @@
         <input type="text" name="_organisation" id="_organisation" required>
         <br />
         <div>@Html.DisplayNameFor(model => model._photoCID)</div>
-        <input type="file" name="photo" id="photo">
-        <button type="button" onclick="upload()">Upload</button>
+        <input type="file" name="photo" id="photo" onchange="upload()">
         <input type="hidden" name="_photoCID" id="_photoCID" required>
 
         <div>@Html.DisplayNameFor(model => model._description)</div>
@@ -37,13 +36,16 @@
     }
 
     async function upload() {
+        console.log("ACTIVATED");
+
         const reader = new FileReader();
         reader.onloadend = async function () {
             const ipfs = window.IpfsHttpClient("https://ipfs.infura.io:5001"); // Connect to IPFS
             const buf = await buffer.Buffer(reader.result) // Convert data into buffer
             const result = await ipfs.add(buf).catch() // Upload buffer to IPFS
             setCID(result.path);
-            let url = `https://ipfs.io/ipfs/${result[0].path}`
+            //let url = `https://ipfs.io/ipfs/${result[0].path}` somehow crashed dubbel check if it still works
+            let url = `https://ipfs.io/ipfs/${result.path}`
         }
         const photo = document.getElementById("photo");
         reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
