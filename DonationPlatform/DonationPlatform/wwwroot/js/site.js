@@ -8,7 +8,6 @@ function MyAction() {
 }
 
 async function ethEnabled() {
-    console.log('eth');
     if (window.web3) {
         window.web3 = new Web3(window.web3.currentProvider);
         window.ethereum.enable();
@@ -41,7 +40,7 @@ async function donateToProject(number) {
     var contract = await getContract();
     var accounts = await web3.eth.getAccounts();
 
-    amountDonate = parseInt(document.getElementById('amountToDonate').value) * 1000000000000000000;
+    amountDonate = parseFloat(document.getElementById('amountToDonate').value) * 1000000000000000000;
 
     let donateCallToContract = await contract.methods.fundProject(number).send({ from: accounts[0], value: amountDonate })
         .then(result => { return result })
@@ -62,8 +61,6 @@ async function loadDetailsPage(number) {
         .then(result => { return result })
         .catch(err => console.log(err));
 
-    console.log(project);
-
     if (project === undefined) {
         window.location.href = '/project/notFound';
     }
@@ -71,7 +68,7 @@ async function loadDetailsPage(number) {
     document.getElementById('project-name').innerText = project.projectName;
     document.getElementById('project-description').innerText = project.description;
     document.getElementById('organisation').innerText = project.name;
-    document.getElementById('donation').innerText = project.totalDonation;
+    document.getElementById('donation').innerText = project.totalDonation / 1000000000000000000 + " ETH";
 }
 
 async function makeDonateProject() {
@@ -100,8 +97,6 @@ async function getAllProjectsOfContract() {
         .call()
         .then(result => { return result })
         .catch(err => console.log(err));
-
-    console.log(makeProjectCall);
 }
 
 async function getAllDonationsOfContract() {
