@@ -48,12 +48,12 @@
                 cardBody.className = 'card-body';
 
                 let title = document.createElement('h5');
-                title.innerText = makeProjectCall.projectAddress;
+                title.innerText = makeProjectCall.projectName;
                 title.className = 'card-title';
 
                 let meerInfo = document.createElement('a');
                 meerInfo.className = 'btn btn-primary';
-                meerInfo.innerText = 'Meer info';
+                meerInfo.innerText = 'Read more';
                 meerInfo.href = '/Project/Details/' + makeProjectCall.projectId;
 
                 card.appendChild(cardheader);

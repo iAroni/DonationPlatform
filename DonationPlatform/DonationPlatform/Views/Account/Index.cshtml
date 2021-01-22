@@ -40,7 +40,7 @@
             name.innerText = makeProjectCall.name;
 
             let projectAddress = document.createElement('th');
-            projectAddress.innerText = makeProjectCall.projectAddress;
+            projectAddress.innerText = makeProjectCall.projectName;
 
             let deleteProject;
             if (!makeProjectCall.isActive) {
@@ -58,7 +58,7 @@
                 };
             } else {
                 deleteProject = document.createElement('button');
-                deleteProject.innerText = 'Delete';
+                deleteProject.innerText = 'Deactivate';
                 deleteProject.className = 'btn btn-primary';
                 deleteProject.style = 'background-color: red';
                 deleteProject.onclick = async function deactiveProject() {
