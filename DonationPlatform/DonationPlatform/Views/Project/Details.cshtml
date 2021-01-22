@@ -7,46 +7,42 @@
 
 }
 
-    <div class="container-fluid">
-        <h1 id="project-name" class="text-center">@Html.DisplayFor(model => model.Name)</h1>
-        <div class="text-center">
-            <img src="~/lib/dummy pic.png" style="height:250px" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 id="project-name" class="text-center">@Html.DisplayFor(model => model.Name)</h1>
         </div>
 
-        <hr />
-
-        <div class="container">
+        <div class="col-md-6">
+            <h3>Organisation</h3>
+            <p id="organisation" class="card-text">@Html.DisplayFor(model => model.Name)</p>
+            <br />
             <h3>Description</h3>
             <p id="project-description" class="card-text">@Html.DisplayFor(model => model.Description)</p>
-        </div>
-
-        <hr />
-
-        <div class="container">
-            <h3>Organisation</h3>
-            <p id="organisation" class="card-text">@Html.DisplayFor(model => model.Description)</p>
-        </div>
-
-        <hr />
-
-        <div class="container">
-            <h3>Total Donation</h3>
+            <br />
+            <h3>Total Donated</h3>
             <p id="donation" class="card-text"></p>
+            <br />
+            <br />
+            <br />
+
         </div>
 
-        <hr />
-
-        <div class="container">
-            Amount to donate<input type="number" id="amountToDonate" value="1" />
-            <button class="btn btn-primary" onclick="donateToProject(@test)">DONATE</button>
+        <div class="col-md-6">
+            <img src="" id="photo" style="height:250px" />
         </div>
-
-        <div class="container">
-            <p id="message-for-donate"></p>
-            <a href="/Project/" class="btn btn-primary">Back</a>
-        </div>
-
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+                Amount to donate (in ETH) <input type="number" id="amountToDonate" value="1" />
+                <button class="btn btn-primary" onclick="donateToProject(@test)">DONATE</button>
+           
+                <p id="message-for-donate"></p>
+                <a href="/Project/" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</div>
 
 <script>
     window.onload = async function () {

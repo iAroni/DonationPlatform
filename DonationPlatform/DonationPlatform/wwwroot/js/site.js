@@ -67,6 +67,7 @@ async function loadDetailsPage(number) {
 
     document.getElementById('project-name').innerText = project.projectName;
     document.getElementById('project-description').innerText = project.description;
+    document.getElementById('photo').src = `https://ipfs.io/ipfs/${project.photoCid}`;
     document.getElementById('organisation').innerText = project.name;
     document.getElementById('donation').innerText = project.totalDonation / 1000000000000000000 + " ETH";
 }
