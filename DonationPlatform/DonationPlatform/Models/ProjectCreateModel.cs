@@ -16,5 +16,7 @@ namespace DonationPlatform.Models
         public string _organisation { get; set; }
         [DisplayName("Beschrijving : ")]
         public string _description { get; set; }
+        [DisplayName("Foto : ")]
+        public string _photoCID { get; set; }
     }
 }

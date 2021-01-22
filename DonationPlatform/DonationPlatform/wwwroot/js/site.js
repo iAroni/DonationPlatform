@@ -82,8 +82,9 @@ async function makeDonateProject() {
     var _name = document.getElementById("_name").value;
     var _description = document.getElementById("_description").value;
     var _organisation = document.getElementById("_organisation").value;
+    var _photoCID = document.getElementById("_photoCID").value;
 
-    let makeProjectCall = await contract.methods.makeProject(_projectAddress, _name, _organisation, _description)
+    let makeProjectCall = await contract.methods.makeProject(_projectAddress, _name, _organisation, _description, _photoCID)
         .send({ from: accounts[0] })
         .then(result => {
             document.getElementById('message').innerText = "Success"

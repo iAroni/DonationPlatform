@@ -40,6 +40,9 @@
 <script>
     window.onload = async function () {
         var allDonations = await getAllDonationsOfContract();
+
+        console.log(allDonations);
+
         allDonations = allDonations.reverse();
         var table = "<tr>";
         table += "<th>Project</th>";
