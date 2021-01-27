@@ -3,24 +3,31 @@
 *@
 
 <style>
-    table {
-        font-family: arial, sans-serif;
+    #history {
+        font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
 
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
+    #history td, #history th {
+      border: 1px solid #ddd;
+      padding: 8px;
     }
 
-    tr:nth-child(even) {
-        background-color: #dddddd;
+    #history tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #history th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #212529;
+        color: white;
     }
 </style>
 <div class="container">
-    <div style="text-align:center">
+    <div style="text-align: center">
         <h1>History</h1>
 
         <p>Here you can find the previous donations. The latest donations are listed first.</p>
@@ -47,10 +54,10 @@
         for (var i = 0; i < allDonations.length; i++) {
             var current = allDonations[i];
             table += "<tr>";
-            table += `<th>${current.projectName}</th>`;
-            table += `<th>${current.amount / 1000000000000000000}</th>`;
-            table += `<th>${current.donator}</th>`;
-            table += `<th>${new Date(current.date*1000).toUTCString()}</th>`;
+            table += `<td>${current.projectName}</td>`;
+            table += `<td>${current.amount / 1000000000000000000}</td>`;
+            table += `<td>${current.donator}</td>`;
+            table += `<td>${new Date(current.date*1000).toUTCString()}</td>`;
             table += "</tr>";
         }
 
