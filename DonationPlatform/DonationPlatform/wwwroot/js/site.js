@@ -46,7 +46,7 @@ async function donateToProject(number) {
         .then(result => { return result })
         .catch(err => console.log(err));
 
-    document.getElementById('message-for-donate').innerText = 'Successvol gedoneerd';
+    document.getElementById('message-for-donate').innerText = 'Donated successfully';
 
     loadDetailsPage(number);
 
@@ -85,7 +85,7 @@ async function makeDonateProject() {
     let makeProjectCall = await contract.methods.makeProject(_projectAddress, _name, _organisation, _description, _photoCID)
         .send({ from: accounts[0] })
         .then(result => {
-            document.getElementById('message').innerText = "Success"
+            document.getElementById('message').innerText = "Project successfully created"
         })
         .catch(err => console.log(err));
 }
