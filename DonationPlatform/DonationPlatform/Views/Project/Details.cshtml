@@ -9,13 +9,16 @@
 
 <div class="container">
     <div class="row">
+        <a href="/Project/" class="btn btn-primary">Back to projects</a>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <h1 id="project-name" class="text-center">@Html.DisplayFor(model => model.Name)</h1>
         </div>
 
-        <hr/>
+        <hr />
 
-        <div class="col-md-6">
+        <div class="col-md-6 jumbotron vcenter">
             <h3>Organisation</h3>
             <p id="organisation" class="card-text">@Html.DisplayFor(model => model.Name)</p>
             <br />
@@ -30,18 +33,19 @@
 
         </div>
 
-        <div class="col-md-6">
-            <img src="" id="photo" style="height:250px" />
+        <div class="col-md-6 vcenter">
+            <img src="" id="photo" style="width:inherit;border-radius: .3rem;" />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
+            <div style="text-align:center;">
                 Amount to donate (in ETH) <input type="number" id="amountToDonate" value="1" />
                 <button class="btn btn-primary" onclick="donateToProject(@test)">DONATE</button>
-           
+
                 <p id="message-for-donate"></p>
-                <a href="/Project/" class="btn btn-primary">Back</a>
+            </div>
         </div>
     </div>
 </div>
